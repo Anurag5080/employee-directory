@@ -40,11 +40,23 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Serve static files from React build in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'public')));
+}
+
 // API routes
 app.use('/api/employees', employeeRoutes);
 
-// Handle undefined routes
-app.use('*', (req, res) => {
+// Serve React app for all other routes in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+}
+
+// Handle undefined API routes
+app.use('/api/*', (req, res) => {
   res.status(404).json({
     success: false,
     message: 'Route not found'
@@ -83,14 +95,5 @@ process.on('SIGINT', () => {
     console.log('Process terminated');
   });
 });
-
-// Serve static files from React build in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'public')));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
-}
 
 module.exports = app;
