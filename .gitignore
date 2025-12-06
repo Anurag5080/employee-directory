@@ -1,0 +1,53 @@
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+.pnpm-store/
+.pnp.*
+
+# Environment
+.env
+**/.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / output
+dist/
+build/
+coverage/
+out/
+.tmp/
+.next/
+.vercel/
+.serverless/
+.svelte-kit/
+
+# Editor and OS
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+Thumbs.db
+
+# Caches
+.cache/
+.eslintcache
+parcel-cache/
+bower_components/
+
+# Misc
+.vagrant/
+.envrc
+.history
+*.local
