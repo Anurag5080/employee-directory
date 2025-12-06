@@ -1,26 +1,28 @@
 /* App Layout */
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #f0f4f8;
 }
 
 .app-header {
-  background: rgba(255, 255, 255, 0.95);
+  background: #2d3748;
   padding: 2rem 0;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .app-header h1 {
-  color: #333;
+  color: #ffffff;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .app-header p {
-  color: #666;
+  color: #cbd5e0;
   font-size: 1.1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .app-main {
@@ -97,9 +99,10 @@
 }
 
 .employee-list-header h2 {
-  color: white;
+  color: #2d3748;
   font-size: 1.5rem;
   font-weight: 600;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .employee-grid {
@@ -127,12 +130,13 @@
 }
 
 .employee-name {
-  color: #333;
+  color: #1a202c;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid #e2e8f0;
   padding-bottom: 0.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .employee-details {
@@ -147,16 +151,18 @@
 }
 
 .detail-label {
-  font-weight: 600;
-  color: #666;
+  font-weight: 500;
+  color: #4a5568;
   min-width: 100px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .detail-value {
-  color: #333;
+  color: #1a202c;
   text-align: right;
   flex: 1;
   margin-left: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .employee-actions {
@@ -297,8 +303,9 @@
 .loading {
   text-align: center;
   padding: 3rem;
-  color: white;
+  color: #4a5568;
   font-size: 1.2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .error-message {
@@ -369,5 +376,151 @@
   
   .employee-actions {
     flex-direction: column;
+  }
+}
+
+/* Employee Modal Styles */
+.employee-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.employee-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid #e2e8f0;
+}
+
+.employee-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 12px 12px 0 0;
+}
+
+.employee-modal-title {
+  color: #1a202c;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.employee-modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #718096;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employee-modal-close-btn:hover {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.employee-modal-body {
+  padding: 1.5rem;
+}
+
+.employee-modal-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  color: #2d3748;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.employee-modal-details {
+  space-y: 0.75rem;
+}
+
+.modal-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f7fafc;
+}
+
+.modal-detail-row:last-child {
+  border-bottom: none;
+}
+
+.modal-detail-label {
+  font-weight: 500;
+  color: #4a5568;
+  min-width: 120px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.modal-detail-value {
+  color: #1a202c;
+  text-align: right;
+  flex: 1;
+  margin-left: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+}
+
+.employee-modal-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+  .employee-modal-content {
+    margin: 10px;
+    max-height: calc(100vh - 20px);
+  }
+  
+  .employee-modal-footer {
+    flex-direction: column;
+  }
+  
+  .modal-detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .modal-detail-value {
+    margin-left: 0;
+    text-align: left;
+    margin-top: 0.25rem;
   }
 }

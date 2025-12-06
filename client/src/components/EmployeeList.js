@@ -3,7 +3,7 @@ import EmployeeCard from './EmployeeCard';
 
 // Component that displays a list of employee cards
 // Handles empty state and renders employee grid
-const EmployeeList = ({ employees, onEdit, onDelete }) => {
+const EmployeeList = ({ employees, onEdit, onDelete, onCardClick }) => {
   // Show empty state message when no employees match the search
   const renderEmptyState = () => (
     <div className="empty-state">
@@ -26,6 +26,7 @@ const EmployeeList = ({ employees, onEdit, onDelete }) => {
             employee={employee}
             onEdit={onEdit}
             onDelete={onDelete}
+            onCardClick={onCardClick}
           />
         ))}
       </div>

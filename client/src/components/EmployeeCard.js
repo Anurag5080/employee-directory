@@ -2,7 +2,7 @@ import React from 'react';
 
 // Component that displays individual employee information in a card format
 // Shows employee details and provides edit/delete actions
-const EmployeeCard = ({ employee, onEdit, onDelete }) => {
+const EmployeeCard = ({ employee, onEdit, onDelete, onCardClick }) => {
   // Format date string to a more readable format
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
@@ -24,8 +24,20 @@ const EmployeeCard = ({ employee, onEdit, onDelete }) => {
     onDelete(employee._id, employee.name);
   };
 
+  // Handle card click to open modal
+  const handleCardClick = () => {
+    if (onCardClick) {
+      onCardClick(employee);
+    }
+  };
+
+  // Prevent click events from bubbling up from action buttons
+  const handleActionClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className="employee-card">
+    <div className="employee-card" onClick={handleCardClick}>
       <div className="employee-info">
         <h3 className="employee-name">{employee.name}</h3>
         <div className="employee-details">
@@ -57,14 +69,20 @@ const EmployeeCard = ({ employee, onEdit, onDelete }) => {
       <div className="employee-actions">
         <button
           className="btn btn-edit"
-          onClick={handleEdit}
+          onClick={(e) => {
+            handleActionClick(e);
+            handleEdit();
+          }}
           aria-label={`Edit ${employee.name}`}
         >
           Edit
         </button>
         <button
           className="btn btn-delete"
-          onClick={handleDelete}
+          onClick={(e) => {
+            handleActionClick(e);
+            handleDelete();
+          }}
           aria-label={`Delete ${employee.name}`}
         >
           Delete

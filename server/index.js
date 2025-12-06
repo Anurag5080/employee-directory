@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 const connectDB = require('./config/database');
 
 // Import routes
@@ -10,8 +11,11 @@ const employeeRoutes = require('./routes/employees');
 // Initialize express app
 const app = express();
 
-// Connect to database
-connectDB();
+// Connect to database with error handling
+connectDB().catch((error) => {
+  console.error('Failed to connect to database:', error);
+  console.log('Server will continue to run but database operations will fail');
+});
 
 // Middleware
 app.use(cors({
@@ -59,10 +63,34 @@ app.use((error, req, res, next) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV}`);
   console.log(`API URL: http://localhost:${PORT}/api`);
 });
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
+
+// Serve static files from React build in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'public')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+}
 
 module.exports = app;

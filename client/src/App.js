@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeList from './components/EmployeeList';
 import EmployeeForm from './components/EmployeeForm';
+import EmployeeModal from './components/EmployeeModal';
 import SearchBar from './components/SearchBar';
 import { employeeService } from './services/employeeService';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +17,8 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   // Fetch employees from the backend API
   // Optional search parameter filters results by name or department
@@ -80,6 +83,12 @@ function App() {
       });
       console.error('Error updating employee:', err);
     }
+  };
+
+  // Handle card click to open modal with employee details
+  const handleCardClick = (employee) => {
+    setSelectedEmployee(employee);
+    setShowModal(true);
   };
 
   // Handle editing an employee - opens the form with existing data
@@ -160,6 +169,12 @@ function App() {
     setEditingEmployee(null);
   };
 
+  // Close the employee modal
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedEmployee(null);
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -191,6 +206,7 @@ function App() {
             employees={employees}
             onEdit={handleEditEmployee}
             onDelete={handleDeleteEmployee}
+            onCardClick={handleCardClick}
           />
         )}
 
@@ -201,6 +217,15 @@ function App() {
             onCancel={handleCloseForm}
           />
         )}
+
+        {/* Employee Detail Modal */}
+        <EmployeeModal
+          employee={selectedEmployee}
+          isOpen={showModal}
+          onClose={handleCloseModal}
+          onEdit={handleEditEmployee}
+          onDelete={handleDeleteEmployee}
+        />
 
         {/* Toast notifications container */}
         <ToastContainer

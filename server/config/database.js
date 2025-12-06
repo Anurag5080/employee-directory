@@ -6,9 +6,9 @@ const mongoose = require('mongoose');
  */
 const connectDB = async () => {
   try {
-    // Connection URI - using local MongoDB by default
-    // In production, this should be in environment variables
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/employee_directory', {
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/employee_directory';
+    
+    const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

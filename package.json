@@ -7,12 +7,16 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
-    "install-deps": "npm install && cd server && npm install && cd ../client && npm install"
+    "install-deps": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "deploy": "npm run install-deps && npm run build && node deploy.js"
   },
   "keywords": ["employee", "directory", "react", "nodejs", "mongodb"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "fs-extra": "^11.1.1"
   }
 }
