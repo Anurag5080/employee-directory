@@ -16,7 +16,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^7.6.0",
-    "fs-extra": "^11.1.1"
+    "concurrently": "^7.6.0"
   }
 }
