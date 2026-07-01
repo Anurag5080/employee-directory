@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 /**
  * Employee schema definition
  * @typedef {Object} EmployeeSchema
